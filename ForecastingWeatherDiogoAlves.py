@@ -558,9 +558,6 @@ plt.xlabel('Day in 2016')
 plt.ylabel('Mean Temperature')
 plt.legend(loc='best')
 plt.title('Prediction of VAR')
-# We can clearly see that VAR is the worse of all, while the modified SARIMAX bounces
-# up and down a bit too much, but is able to replicate both the monthly and yearly seasonal effects.
-
 
 ######################## MODEL CHOICE ##############################################################
 # From the above, the logic is clear: we use the SARIMAX model with the last n periods for exogenous variables 
@@ -596,7 +593,6 @@ plt.plot(Predicted_weather)
 ax.xaxis.set_major_locator(mdates.DayLocator(interval=7))
 
 # Let us see how the prediction looks agains the corresponding month of the previous 2 years:
-# First, the next two lines fetch the corresponding observed data from the dataset
 Weather_Jan_2016 = Daily_Full_explanatory[(Daily_Full_explanatory['Date/Time'].astype(str).str[:7] == '2016-01')].iloc[:,1]
 Weather_Jan_2015 = Daily_Full_explanatory[(Daily_Full_explanatory['Date/Time'].astype(str).str[:7] == '2015-01')].iloc[:,1]
 
@@ -611,7 +607,4 @@ plt.ylabel('Temperatures over January')
 plt.legend(loc='best')
 plt.title('Predictions and actual values January')
 # Looks pretty cool! The model is able to replicate the initial high temperatures observed
-# in the previous 2 years, followed by a decrease around the 10th of January towards
-# temperatures around the 0 average.
 
-# Give me the dataset and using this simple method I am able to predict the weather in Jena, how cool is that!
