@@ -1,11 +1,9 @@
 """
-Solution of the Weather forecasting problem: Diogo Jorge Vieira Alves, for Equinox
+Weather Forecasting problem for the Jena Dataset (Kaggle)
 Comments are marked with a #. 
 If running, please stop in each block and read the comments carefully! Each block ends in a space 
 and the next begins with a comment sign.
-Do take time to read the comments, please, as I also present some conclusions 
-after a block sometimes :)
-
+Dataset: https://www.kaggle.com/pankrzysiu/weather-archive-jena
 Description of the variables of the data:
 p (mbar) - Air pressure (SI: bar)
 T (degC) - Air Temperature (SI: Celsius)
@@ -36,9 +34,9 @@ from tbats import TBATS
 from autots import AutoTS
 import matplotlib.dates as mdates
 
-# Reads the csv file from disk. Change address to where you have the csv file!
+# Reads the csv file from disk
 WeatherTimeSeries = pd.read_csv(
-        r'C:\Users\dialv\OneDrive\Desktop\Agent-Based Model\jena_climate_2009_2016.csv', 
+        r'HOMEDIRECTORY\jena_climate_2009_2016.csv', 
         parse_dates=True,
         index_col=0)
 WeatherTimeSeries.index.name = 'Date/Time'
@@ -46,7 +44,7 @@ WeatherTimeSeries.reset_index(inplace=True)
 WeatherSeriesDate = WeatherTimeSeries.iloc[:,0]
 WeatherSeriesDate = pd.to_datetime(WeatherSeriesDate)
 
-# Assuming temperature is the Target:
+# Temperature as the Target:
 WeatherSeriesTarget = WeatherTimeSeries.iloc[:,2]
 # Getting explanatory variables to explain temperature
 Explanatory_Vars = WeatherTimeSeries.columns.tolist()
@@ -67,7 +65,7 @@ plt.hist(WeatherSeriesTarget, bins=10)
 plt.show()
 # A boxplot:
 sn.boxplot(WeatherSeriesTarget,orient = "h",palette = "Set2")
-# We can clearly see the temperature in seasonal patterns, as well as a mean temp of around 10 degrees.
+# Mean temp of around 10 degrees.
 
 # Describing explanatory variables individually:
 for column in WeatherSeriesExplanatory.columns:
