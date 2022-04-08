@@ -1,5 +1,5 @@
 """
-Weather Forecasting problem for the Jena Dataset (Kaggle)
+Weather Forecasting problem for the Jena Dataset
 Comments are marked with a #. 
 If running, please stop in each block and read the comments carefully! Each block ends in a space 
 and the next begins with a comment sign.
@@ -357,7 +357,6 @@ Granger_causes_Temperature.rename(columns = {'T (degC)_y':'Granger_Value_p-test'
 # Note that this matches the correlation and graphical analysis (all variables except
 # wv (m/s), max. wv (m/s) and wd (deg) Granger cause Temperature. We could exclude these 3.
 
-
 # Next step: Cointegration test. Since all series are I(0), this step can be waived, but will leave it here for completeness:
 # Cointegration test (Johansen):
 from statsmodels.tsa.vector_ar.vecm import coint_johansen
@@ -435,10 +434,10 @@ for i, (col,ax) in enumerate(zip(Daily_Full_explanatory.iloc[:,1:15].columns, ax
     ax.spines["top"].set_alpha(0)
     ax.tick_params(labelsize=6)
 plt.tight_layout();
-# Absolutely horrible fit, VAR cannot model seasonality, finds it safer to just forecast mean of the series
-# Seems to be the approach that minimizes the error metric. We had seen something similar in SARIMA.
+# VAR cannot model seasonality, finds it safer to just forecast mean of the series
+# Seems to be the approach that minimizes the error metric.
 
-# EValuate Accuracy of the models (only some explanatory variables, the others are easy enough!)
+# Evaluate Accuracy of the models (only some explanatory variables, the others are easy enough!)
 # Uniform names:
 model_AUTOTS_prediction = Autots_forecast.iloc[:,0]
 dates = list(model_AUTOTS_prediction.index)
@@ -604,5 +603,5 @@ plt.xlabel('Observation')
 plt.ylabel('Temperatures over January')
 plt.legend(loc='best')
 plt.title('Predictions and actual values January')
-# Looks pretty cool! The model is able to replicate the initial high temperatures observed
-
+# The model is able to replicate the initial high temperatures observed
+	
